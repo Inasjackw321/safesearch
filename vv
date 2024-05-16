@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Browser</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .search-container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .search-container input {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .search-container select, .search-container button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .search-container button {
+            background: #4285f4;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <h1>Search the Web</h1>
+        <input type="text" id="searchQuery" placeholder="Enter your search query...">
+        <br>
+        <select id="searchEngine">
+            <option value="google">Google</option>
+            <option value="bing">Bing</option>
+            <option value="duckduckgo">DuckDuckGo</option>
+        </select>
+        <br>
+        <button onclick="performSearch()">Search</button>
+    </div>
+    <script>
+        function performSearch() {
+            const query = document.getElementById('searchQuery').value;
+            const engine = document.getElementById('searchEngine').value;
+
+            if (!query) {
+                alert("Please enter a search query.");
+                return;
+            }
+
+            let url = '';
+            switch (engine) {
+                case 'google':
+                    url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                    break;
+                case 'bing':
+                    url = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
+                    break;
+                case 'duckduckgo':
+                    url = `https://duckduckgo.com/?q=${encodeURIComponent(query)}`;
+                    break;
+                default:
+                    alert("Unknown search engine");
+                    return;
+            }
+
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
